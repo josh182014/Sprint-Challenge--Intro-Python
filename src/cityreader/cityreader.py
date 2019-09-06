@@ -86,10 +86,18 @@ for i in tmp2:
 
 print(cords)
 
-a = cords[0]
-b = cords[1]
-c = cords[2]
-d = cords[3]
+if not cords[0] > cords[2]:
+    a = cords[0]
+    c = cords[2]
+else:
+    a = cords[2]
+    c = cords[0]
+if not cords[0] > cords[2]:
+    b = cords[1]
+    d = cords[3]
+else:
+    b = cords[3]
+    d = cords[1]
 
 
 def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
@@ -99,9 +107,22 @@ def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
     # Go through each city and check to see if it falls within
     # the specified coordinates.
 
+    if not lat1 > lat2:
+        a = lat1
+        c = lat2
+    else:
+        a = lat2
+        c = lat1
+    if not lon1 > lon2:
+        b = lon1
+        d = lon2
+    else:
+        b = lon2
+        d = lon1
+
     for i in cities:
         print(i.lat, lat1, lat2)
-        if int(i.lat) in range(lat1, lat2) and int(i.lon) in range(lon1, lon2):
+        if int(i.lat) in range(a, c) and int(i.lon) in range(b, d):
             within.append(i)
 
     for j in within:
@@ -109,5 +130,4 @@ def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
     return within
 
 
-cityreader_stretch(45, -100, 32, -120, cities)
 cityreader_stretch(a, b, c, d, cities)
